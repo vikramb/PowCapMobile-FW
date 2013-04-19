@@ -1,0 +1,881 @@
+   1               		.file	"commands.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__ = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.LEDs_ToggleLEDs.clone.0,"ax",@progbits
+  18               	LEDs_ToggleLEDs.clone.0:
+  19               	.LFB36:
+  20               	.LSM0:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	/* stack size = 0 */
+  24               	.L__stack_usage = 0
+  25               	.LVL0:
+  26               	.LSM1:
+  27 0000 8BB1      		in r24,43-32
+  28 0002 98E0      		ldi r25,lo8(8)
+  29 0004 8927      		eor r24,r25
+  30 0006 8BB9      		out 43-32,r24
+  31               	/* epilogue start */
+  32               	.LSM2:
+  33 0008 0895      		ret
+  34               	.LFE36:
+  36               		.section	.text.LEDs_TurnOffLEDs.clone.1,"ax",@progbits
+  38               	LEDs_TurnOffLEDs.clone.1:
+  39               	.LFB35:
+  40               	.LSM3:
+  41               	/* prologue: function */
+  42               	/* frame size = 0 */
+  43               	/* stack size = 0 */
+  44               	.L__stack_usage = 0
+  45               	.LVL1:
+  46               	.LSM4:
+  47 0000 5B98      		cbi 43-32,3
+  48               	/* epilogue start */
+  49               	.LSM5:
+  50 0002 0895      		ret
+  51               	.LFE35:
+  53               		.section	.text.LEDs_TurnOnLEDs.clone.2,"ax",@progbits
+  55               	LEDs_TurnOnLEDs.clone.2:
+  56               	.LFB34:
+  57               	.LSM6:
+  58               	/* prologue: function */
+  59               	/* frame size = 0 */
+  60               	/* stack size = 0 */
+  61               	.L__stack_usage = 0
+  62               	.LVL2:
+  63               	.LSM7:
+  64 0000 5B9A      		sbi 43-32,3
+  65               	/* epilogue start */
+  66               	.LSM8:
+  67 0002 0895      		ret
+  68               	.LFE34:
+  70               		.section	.text.cb_gainC1,"ax",@progbits
+  71               	.global	cb_gainC1
+  73               	cb_gainC1:
+  74               	.LFB22:
+  75               	.LSM9:
+  76               	.LVL3:
+  77 0000 EF92      		push r14
+  78 0002 FF92      		push r15
+  79 0004 0F93      		push r16
+  80 0006 1F93      		push r17
+  81 0008 DF93      		push r29
+  82 000a CF93      		push r28
+  83 000c 00D0      		rcall .
+  84 000e CDB7      		in r28,__SP_L__
+  85 0010 DEB7      		in r29,__SP_H__
+  86               	/* prologue: function */
+  87               	/* frame size = 2 */
+  88               	/* stack size = 8 */
+  89               	.L__stack_usage = 8
+  90               	.LSM10:
+  91 0012 9A83      		std Y+2,r25
+  92 0014 8983      		std Y+1,r24
+  93               	.LVL4:
+  94               	.LSM11:
+  95 0016 BE01      		movw r22,r28
+  96 0018 6F5F      		subi r22,lo8(-(1))
+  97 001a 7F4F      		sbci r23,hi8(-(1))
+  98 001c 40E1      		ldi r20,lo8(16)
+  99 001e 50E0      		ldi r21,hi8(16)
+ 100 0020 0E94 0000 		call strtol
+ 101               	.LVL5:
+ 102 0024 7B01      		movw r14,r22
+ 103               	.LVL6:
+ 104               	.LBB2:
+ 105               	.LSM12:
+ 106 0026 00E0      		ldi r16,lo8(0)
+ 107 0028 10E0      		ldi r17,hi8(0)
+ 108 002a 00C0      		rjmp .L5
+ 109               	.LVL7:
+ 110               	.L6:
+ 111               	.LSM13:
+ 112 002c 0E94 0000 		call LEDs_ToggleLEDs.clone.0
+ 113               	.LSM14:
+ 114 0030 0F5F      		subi r16,lo8(-(1))
+ 115 0032 1F4F      		sbci r17,hi8(-(1))
+ 116               	.LVL8:
+ 117               	.L5:
+ 118               	.LSM15:
+ 119 0034 0E15      		cp r16,r14
+ 120 0036 1F05      		cpc r17,r15
+ 121 0038 04F0      		brlt .L6
+ 122               	.LBE2:
+ 123               	.LSM16:
+ 124 003a 2C98      		cbi 37-32,4
+ 125               	.LSM17:
+ 126 003c 8E2D      		mov r24,r14
+ 127 003e 0E94 0000 		call SPI_MaterTransmit
+ 128               	.LSM18:
+ 129 0042 2C9A      		sbi 37-32,4
+ 130               	/* epilogue start */
+ 131               	.LSM19:
+ 132 0044 0F90      		pop __tmp_reg__
+ 133 0046 0F90      		pop __tmp_reg__
+ 134 0048 CF91      		pop r28
+ 135 004a DF91      		pop r29
+ 136 004c 1F91      		pop r17
+ 137 004e 0F91      		pop r16
+ 138               	.LVL9:
+ 139 0050 FF90      		pop r15
+ 140 0052 EF90      		pop r14
+ 141               	.LVL10:
+ 142 0054 0895      		ret
+ 143               	.LFE22:
+ 145               		.section	.text.cb_gainV1,"ax",@progbits
+ 146               	.global	cb_gainV1
+ 148               	cb_gainV1:
+ 149               	.LFB23:
+ 150               	.LSM20:
+ 151               	.LVL11:
+ 152 0000 EF92      		push r14
+ 153 0002 FF92      		push r15
+ 154 0004 0F93      		push r16
+ 155 0006 1F93      		push r17
+ 156 0008 DF93      		push r29
+ 157 000a CF93      		push r28
+ 158 000c 00D0      		rcall .
+ 159 000e CDB7      		in r28,__SP_L__
+ 160 0010 DEB7      		in r29,__SP_H__
+ 161               	/* prologue: function */
+ 162               	/* frame size = 2 */
+ 163               	/* stack size = 8 */
+ 164               	.L__stack_usage = 8
+ 165               	.LSM21:
+ 166 0012 9A83      		std Y+2,r25
+ 167 0014 8983      		std Y+1,r24
+ 168               	.LVL12:
+ 169               	.LSM22:
+ 170 0016 BE01      		movw r22,r28
+ 171 0018 6F5F      		subi r22,lo8(-(1))
+ 172 001a 7F4F      		sbci r23,hi8(-(1))
+ 173 001c 40E1      		ldi r20,lo8(16)
+ 174 001e 50E0      		ldi r21,hi8(16)
+ 175 0020 0E94 0000 		call strtol
+ 176               	.LVL13:
+ 177 0024 7B01      		movw r14,r22
+ 178               	.LVL14:
+ 179               	.LBB3:
+ 180               	.LSM23:
+ 181 0026 00E0      		ldi r16,lo8(0)
+ 182 0028 10E0      		ldi r17,hi8(0)
+ 183 002a 00C0      		rjmp .L8
+ 184               	.LVL15:
+ 185               	.L9:
+ 186               	.LSM24:
+ 187 002c 0E94 0000 		call LEDs_ToggleLEDs.clone.0
+ 188               	.LSM25:
+ 189 0030 0F5F      		subi r16,lo8(-(1))
+ 190 0032 1F4F      		sbci r17,hi8(-(1))
+ 191               	.LVL16:
+ 192               	.L8:
+ 193               	.LSM26:
+ 194 0034 0E15      		cp r16,r14
+ 195 0036 1F05      		cpc r17,r15
+ 196 0038 04F0      		brlt .L9
+ 197               	.LBE3:
+ 198               	.LSM27:
+ 199 003a 2898      		cbi 37-32,0
+ 200               	.LSM28:
+ 201 003c 8E2D      		mov r24,r14
+ 202 003e 0E94 0000 		call SPI_MaterTransmit
+ 203               	.LSM29:
+ 204 0042 289A      		sbi 37-32,0
+ 205               	/* epilogue start */
+ 206               	.LSM30:
+ 207 0044 0F90      		pop __tmp_reg__
+ 208 0046 0F90      		pop __tmp_reg__
+ 209 0048 CF91      		pop r28
+ 210 004a DF91      		pop r29
+ 211 004c 1F91      		pop r17
+ 212 004e 0F91      		pop r16
+ 213               	.LVL17:
+ 214 0050 FF90      		pop r15
+ 215 0052 EF90      		pop r14
+ 216               	.LVL18:
+ 217 0054 0895      		ret
+ 218               	.LFE23:
+ 220               		.section	.text.cb_gainC2,"ax",@progbits
+ 221               	.global	cb_gainC2
+ 223               	cb_gainC2:
+ 224               	.LFB24:
+ 225               	.LSM31:
+ 226               	.LVL19:
+ 227 0000 EF92      		push r14
+ 228 0002 FF92      		push r15
+ 229 0004 0F93      		push r16
+ 230 0006 1F93      		push r17
+ 231 0008 DF93      		push r29
+ 232 000a CF93      		push r28
+ 233 000c 00D0      		rcall .
+ 234 000e CDB7      		in r28,__SP_L__
+ 235 0010 DEB7      		in r29,__SP_H__
+ 236               	/* prologue: function */
+ 237               	/* frame size = 2 */
+ 238               	/* stack size = 8 */
+ 239               	.L__stack_usage = 8
+ 240               	.LSM32:
+ 241 0012 9A83      		std Y+2,r25
+ 242 0014 8983      		std Y+1,r24
+ 243               	.LVL20:
+ 244               	.LSM33:
+ 245 0016 BE01      		movw r22,r28
+ 246 0018 6F5F      		subi r22,lo8(-(1))
+ 247 001a 7F4F      		sbci r23,hi8(-(1))
+ 248 001c 40E1      		ldi r20,lo8(16)
+ 249 001e 50E0      		ldi r21,hi8(16)
+ 250 0020 0E94 0000 		call strtol
+ 251               	.LVL21:
+ 252 0024 7B01      		movw r14,r22
+ 253               	.LVL22:
+ 254               	.LBB4:
+ 255               	.LSM34:
+ 256 0026 00E0      		ldi r16,lo8(0)
+ 257 0028 10E0      		ldi r17,hi8(0)
+ 258 002a 00C0      		rjmp .L11
+ 259               	.LVL23:
+ 260               	.L12:
+ 261               	.LSM35:
+ 262 002c 0E94 0000 		call LEDs_ToggleLEDs.clone.0
+ 263               	.LSM36:
+ 264 0030 0F5F      		subi r16,lo8(-(1))
+ 265 0032 1F4F      		sbci r17,hi8(-(1))
+ 266               	.LVL24:
+ 267               	.L11:
+ 268               	.LSM37:
+ 269 0034 0E15      		cp r16,r14
+ 270 0036 1F05      		cpc r17,r15
+ 271 0038 04F0      		brlt .L12
+ 272               	.LBE4:
+ 273               	.LSM38:
+ 274 003a 2E98      		cbi 37-32,6
+ 275               	.LSM39:
+ 276 003c 8E2D      		mov r24,r14
+ 277 003e 0E94 0000 		call SPI_MaterTransmit
+ 278               	.LSM40:
+ 279 0042 2E9A      		sbi 37-32,6
+ 280               	/* epilogue start */
+ 281               	.LSM41:
+ 282 0044 0F90      		pop __tmp_reg__
+ 283 0046 0F90      		pop __tmp_reg__
+ 284 0048 CF91      		pop r28
+ 285 004a DF91      		pop r29
+ 286 004c 1F91      		pop r17
+ 287 004e 0F91      		pop r16
+ 288               	.LVL25:
+ 289 0050 FF90      		pop r15
+ 290 0052 EF90      		pop r14
+ 291               	.LVL26:
+ 292 0054 0895      		ret
+ 293               	.LFE24:
+ 295               		.section	.text.cb_gainV2,"ax",@progbits
+ 296               	.global	cb_gainV2
+ 298               	cb_gainV2:
+ 299               	.LFB25:
+ 300               	.LSM42:
+ 301               	.LVL27:
+ 302 0000 EF92      		push r14
+ 303 0002 FF92      		push r15
+ 304 0004 0F93      		push r16
+ 305 0006 1F93      		push r17
+ 306 0008 DF93      		push r29
+ 307 000a CF93      		push r28
+ 308 000c 00D0      		rcall .
+ 309 000e CDB7      		in r28,__SP_L__
+ 310 0010 DEB7      		in r29,__SP_H__
+ 311               	/* prologue: function */
+ 312               	/* frame size = 2 */
+ 313               	/* stack size = 8 */
+ 314               	.L__stack_usage = 8
+ 315               	.LSM43:
+ 316 0012 9A83      		std Y+2,r25
+ 317 0014 8983      		std Y+1,r24
+ 318               	.LVL28:
+ 319               	.LSM44:
+ 320 0016 BE01      		movw r22,r28
+ 321 0018 6F5F      		subi r22,lo8(-(1))
+ 322 001a 7F4F      		sbci r23,hi8(-(1))
+ 323 001c 40E1      		ldi r20,lo8(16)
+ 324 001e 50E0      		ldi r21,hi8(16)
+ 325 0020 0E94 0000 		call strtol
+ 326               	.LVL29:
+ 327 0024 7B01      		movw r14,r22
+ 328               	.LVL30:
+ 329               	.LBB5:
+ 330               	.LSM45:
+ 331 0026 00E0      		ldi r16,lo8(0)
+ 332 0028 10E0      		ldi r17,hi8(0)
+ 333 002a 00C0      		rjmp .L14
+ 334               	.LVL31:
+ 335               	.L15:
+ 336               	.LSM46:
+ 337 002c 0E94 0000 		call LEDs_ToggleLEDs.clone.0
+ 338               	.LSM47:
+ 339 0030 0F5F      		subi r16,lo8(-(1))
+ 340 0032 1F4F      		sbci r17,hi8(-(1))
+ 341               	.LVL32:
+ 342               	.L14:
+ 343               	.LSM48:
+ 344 0034 0E15      		cp r16,r14
+ 345 0036 1F05      		cpc r17,r15
+ 346 0038 04F0      		brlt .L15
+ 347               	.LBE5:
+ 348               	.LSM49:
+ 349 003a 2D98      		cbi 37-32,5
+ 350               	.LSM50:
+ 351 003c 8E2D      		mov r24,r14
+ 352 003e 0E94 0000 		call SPI_MaterTransmit
+ 353               	.LSM51:
+ 354 0042 2D9A      		sbi 37-32,5
+ 355               	/* epilogue start */
+ 356               	.LSM52:
+ 357 0044 0F90      		pop __tmp_reg__
+ 358 0046 0F90      		pop __tmp_reg__
+ 359 0048 CF91      		pop r28
+ 360 004a DF91      		pop r29
+ 361 004c 1F91      		pop r17
+ 362 004e 0F91      		pop r16
+ 363               	.LVL33:
+ 364 0050 FF90      		pop r15
+ 365 0052 EF90      		pop r14
+ 366               	.LVL34:
+ 367 0054 0895      		ret
+ 368               	.LFE25:
+ 370               		.section	.text.cb_filterV1,"ax",@progbits
+ 371               	.global	cb_filterV1
+ 373               	cb_filterV1:
+ 374               	.LFB26:
+ 375               	.LSM53:
+ 376               	.LVL35:
+ 377 0000 DF93      		push r29
+ 378 0002 CF93      		push r28
+ 379 0004 00D0      		rcall .
+ 380 0006 CDB7      		in r28,__SP_L__
+ 381 0008 DEB7      		in r29,__SP_H__
+ 382               	/* prologue: function */
+ 383               	/* frame size = 2 */
+ 384               	/* stack size = 4 */
+ 385               	.L__stack_usage = 4
+ 386               	.LSM54:
+ 387 000a 9A83      		std Y+2,r25
+ 388 000c 8983      		std Y+1,r24
+ 389               	.LVL36:
+ 390               	.LSM55:
+ 391 000e BE01      		movw r22,r28
+ 392 0010 6F5F      		subi r22,lo8(-(1))
+ 393 0012 7F4F      		sbci r23,hi8(-(1))
+ 394 0014 40E1      		ldi r20,lo8(16)
+ 395 0016 50E0      		ldi r21,hi8(16)
+ 396 0018 0E94 0000 		call strtol
+ 397               	.LVL37:
+ 398               	.LSM56:
+ 399 001c 6115      		cp r22,__zero_reg__
+ 400 001e 7105      		cpc r23,__zero_reg__
+ 401 0020 01F0      		breq .L18
+ 402 0022 6130      		cpi r22,1
+ 403 0024 7105      		cpc r23,__zero_reg__
+ 404 0026 01F4      		brne .L16
+ 405 0028 00C0      		rjmp .L20
+ 406               	.L18:
+ 407               	.LSM57:
+ 408 002a 8C9A      		sbi 49-32,4
+ 409               	.LSM58:
+ 410 002c 0E94 0000 		call LEDs_TurnOnLEDs.clone.2
+ 411               	.LVL38:
+ 412               	.LSM59:
+ 413 0030 00C0      		rjmp .L16
+ 414               	.LVL39:
+ 415               	.L20:
+ 416               	.LSM60:
+ 417 0032 8C98      		cbi 49-32,4
+ 418               	.LSM61:
+ 419 0034 0E94 0000 		call LEDs_TurnOffLEDs.clone.1
+ 420               	.LVL40:
+ 421               	.L16:
+ 422               	/* epilogue start */
+ 423               	.LSM62:
+ 424 0038 0F90      		pop __tmp_reg__
+ 425 003a 0F90      		pop __tmp_reg__
+ 426 003c CF91      		pop r28
+ 427 003e DF91      		pop r29
+ 428 0040 0895      		ret
+ 429               	.LFE26:
+ 431               		.section	.text.cb_filterC1,"ax",@progbits
+ 432               	.global	cb_filterC1
+ 434               	cb_filterC1:
+ 435               	.LFB27:
+ 436               	.LSM63:
+ 437               	.LVL41:
+ 438 0000 DF93      		push r29
+ 439 0002 CF93      		push r28
+ 440 0004 00D0      		rcall .
+ 441 0006 CDB7      		in r28,__SP_L__
+ 442 0008 DEB7      		in r29,__SP_H__
+ 443               	/* prologue: function */
+ 444               	/* frame size = 2 */
+ 445               	/* stack size = 4 */
+ 446               	.L__stack_usage = 4
+ 447               	.LSM64:
+ 448 000a 9A83      		std Y+2,r25
+ 449 000c 8983      		std Y+1,r24
+ 450               	.LVL42:
+ 451               	.LSM65:
+ 452 000e BE01      		movw r22,r28
+ 453 0010 6F5F      		subi r22,lo8(-(1))
+ 454 0012 7F4F      		sbci r23,hi8(-(1))
+ 455 0014 40E1      		ldi r20,lo8(16)
+ 456 0016 50E0      		ldi r21,hi8(16)
+ 457 0018 0E94 0000 		call strtol
+ 458               	.LVL43:
+ 459               	.LSM66:
+ 460 001c 6115      		cp r22,__zero_reg__
+ 461 001e 7105      		cpc r23,__zero_reg__
+ 462 0020 01F0      		breq .L23
+ 463 0022 6130      		cpi r22,1
+ 464 0024 7105      		cpc r23,__zero_reg__
+ 465 0026 01F4      		brne .L21
+ 466 0028 00C0      		rjmp .L25
+ 467               	.L23:
+ 468               	.LSM67:
+ 469 002a 8D9A      		sbi 49-32,5
+ 470               	.LSM68:
+ 471 002c 0E94 0000 		call LEDs_TurnOnLEDs.clone.2
+ 472               	.LVL44:
+ 473               	.LSM69:
+ 474 0030 00C0      		rjmp .L21
+ 475               	.LVL45:
+ 476               	.L25:
+ 477               	.LSM70:
+ 478 0032 8D98      		cbi 49-32,5
+ 479               	.LSM71:
+ 480 0034 0E94 0000 		call LEDs_TurnOffLEDs.clone.1
+ 481               	.LVL46:
+ 482               	.L21:
+ 483               	/* epilogue start */
+ 484               	.LSM72:
+ 485 0038 0F90      		pop __tmp_reg__
+ 486 003a 0F90      		pop __tmp_reg__
+ 487 003c CF91      		pop r28
+ 488 003e DF91      		pop r29
+ 489 0040 0895      		ret
+ 490               	.LFE27:
+ 492               		.section	.text.cb_filterV2,"ax",@progbits
+ 493               	.global	cb_filterV2
+ 495               	cb_filterV2:
+ 496               	.LFB28:
+ 497               	.LSM73:
+ 498               	.LVL47:
+ 499 0000 DF93      		push r29
+ 500 0002 CF93      		push r28
+ 501 0004 00D0      		rcall .
+ 502 0006 CDB7      		in r28,__SP_L__
+ 503 0008 DEB7      		in r29,__SP_H__
+ 504               	/* prologue: function */
+ 505               	/* frame size = 2 */
+ 506               	/* stack size = 4 */
+ 507               	.L__stack_usage = 4
+ 508               	.LSM74:
+ 509 000a 9A83      		std Y+2,r25
+ 510 000c 8983      		std Y+1,r24
+ 511               	.LVL48:
+ 512               	.LSM75:
+ 513 000e BE01      		movw r22,r28
+ 514 0010 6F5F      		subi r22,lo8(-(1))
+ 515 0012 7F4F      		sbci r23,hi8(-(1))
+ 516 0014 40E1      		ldi r20,lo8(16)
+ 517 0016 50E0      		ldi r21,hi8(16)
+ 518 0018 0E94 0000 		call strtol
+ 519               	.LVL49:
+ 520               	.LSM76:
+ 521 001c 6115      		cp r22,__zero_reg__
+ 522 001e 7105      		cpc r23,__zero_reg__
+ 523 0020 01F0      		breq .L28
+ 524 0022 6130      		cpi r22,1
+ 525 0024 7105      		cpc r23,__zero_reg__
+ 526 0026 01F4      		brne .L26
+ 527 0028 00C0      		rjmp .L30
+ 528               	.L28:
+ 529               	.LSM77:
+ 530 002a 8E9A      		sbi 49-32,6
+ 531               	.LSM78:
+ 532 002c 0E94 0000 		call LEDs_TurnOnLEDs.clone.2
+ 533               	.LVL50:
+ 534               	.LSM79:
+ 535 0030 00C0      		rjmp .L26
+ 536               	.LVL51:
+ 537               	.L30:
+ 538               	.LSM80:
+ 539 0032 8E98      		cbi 49-32,6
+ 540               	.LSM81:
+ 541 0034 0E94 0000 		call LEDs_TurnOffLEDs.clone.1
+ 542               	.LVL52:
+ 543               	.L26:
+ 544               	/* epilogue start */
+ 545               	.LSM82:
+ 546 0038 0F90      		pop __tmp_reg__
+ 547 003a 0F90      		pop __tmp_reg__
+ 548 003c CF91      		pop r28
+ 549 003e DF91      		pop r29
+ 550 0040 0895      		ret
+ 551               	.LFE28:
+ 553               		.section	.text.cb_filterC2,"ax",@progbits
+ 554               	.global	cb_filterC2
+ 556               	cb_filterC2:
+ 557               	.LFB29:
+ 558               	.LSM83:
+ 559               	.LVL53:
+ 560 0000 DF93      		push r29
+ 561 0002 CF93      		push r28
+ 562 0004 00D0      		rcall .
+ 563 0006 CDB7      		in r28,__SP_L__
+ 564 0008 DEB7      		in r29,__SP_H__
+ 565               	/* prologue: function */
+ 566               	/* frame size = 2 */
+ 567               	/* stack size = 4 */
+ 568               	.L__stack_usage = 4
+ 569               	.LSM84:
+ 570 000a 9A83      		std Y+2,r25
+ 571 000c 8983      		std Y+1,r24
+ 572               	.LVL54:
+ 573               	.LSM85:
+ 574 000e BE01      		movw r22,r28
+ 575 0010 6F5F      		subi r22,lo8(-(1))
+ 576 0012 7F4F      		sbci r23,hi8(-(1))
+ 577 0014 40E1      		ldi r20,lo8(16)
+ 578 0016 50E0      		ldi r21,hi8(16)
+ 579 0018 0E94 0000 		call strtol
+ 580               	.LVL55:
+ 581               	.LSM86:
+ 582 001c 6115      		cp r22,__zero_reg__
+ 583 001e 7105      		cpc r23,__zero_reg__
+ 584 0020 01F0      		breq .L33
+ 585 0022 6130      		cpi r22,1
+ 586 0024 7105      		cpc r23,__zero_reg__
+ 587 0026 01F4      		brne .L31
+ 588 0028 00C0      		rjmp .L35
+ 589               	.L33:
+ 590               	.LSM87:
+ 591 002a 8F9A      		sbi 49-32,7
+ 592               	.LSM88:
+ 593 002c 0E94 0000 		call LEDs_TurnOnLEDs.clone.2
+ 594               	.LVL56:
+ 595               	.LSM89:
+ 596 0030 00C0      		rjmp .L31
+ 597               	.LVL57:
+ 598               	.L35:
+ 599               	.LSM90:
+ 600 0032 8F98      		cbi 49-32,7
+ 601               	.LSM91:
+ 602 0034 0E94 0000 		call LEDs_TurnOffLEDs.clone.1
+ 603               	.LVL58:
+ 604               	.L31:
+ 605               	/* epilogue start */
+ 606               	.LSM92:
+ 607 0038 0F90      		pop __tmp_reg__
+ 608 003a 0F90      		pop __tmp_reg__
+ 609 003c CF91      		pop r28
+ 610 003e DF91      		pop r29
+ 611 0040 0895      		ret
+ 612               	.LFE29:
+ 614               		.section	.text.cb_notchV1,"ax",@progbits
+ 615               	.global	cb_notchV1
+ 617               	cb_notchV1:
+ 618               	.LFB30:
+ 619               	.LSM93:
+ 620               	.LVL59:
+ 621 0000 DF93      		push r29
+ 622 0002 CF93      		push r28
+ 623 0004 00D0      		rcall .
+ 624 0006 CDB7      		in r28,__SP_L__
+ 625 0008 DEB7      		in r29,__SP_H__
+ 626               	/* prologue: function */
+ 627               	/* frame size = 2 */
+ 628               	/* stack size = 4 */
+ 629               	.L__stack_usage = 4
+ 630               	.LSM94:
+ 631 000a 9A83      		std Y+2,r25
+ 632 000c 8983      		std Y+1,r24
+ 633               	.LVL60:
+ 634               	.LSM95:
+ 635 000e BE01      		movw r22,r28
+ 636 0010 6F5F      		subi r22,lo8(-(1))
+ 637 0012 7F4F      		sbci r23,hi8(-(1))
+ 638 0014 40E1      		ldi r20,lo8(16)
+ 639 0016 50E0      		ldi r21,hi8(16)
+ 640 0018 0E94 0000 		call strtol
+ 641               	.LVL61:
+ 642               	.LSM96:
+ 643 001c 6115      		cp r22,__zero_reg__
+ 644 001e 7105      		cpc r23,__zero_reg__
+ 645 0020 01F0      		breq .L38
+ 646 0022 6130      		cpi r22,1
+ 647 0024 7105      		cpc r23,__zero_reg__
+ 648 0026 01F4      		brne .L36
+ 649 0028 00C0      		rjmp .L40
+ 650               	.L38:
+ 651               	.LSM97:
+ 652 002a 889A      		sbi 49-32,0
+ 653               	.LSM98:
+ 654 002c 0E94 0000 		call LEDs_TurnOnLEDs.clone.2
+ 655               	.LVL62:
+ 656               	.LSM99:
+ 657 0030 00C0      		rjmp .L36
+ 658               	.LVL63:
+ 659               	.L40:
+ 660               	.LSM100:
+ 661 0032 8898      		cbi 49-32,0
+ 662               	.LSM101:
+ 663 0034 0E94 0000 		call LEDs_TurnOffLEDs.clone.1
+ 664               	.LVL64:
+ 665               	.L36:
+ 666               	/* epilogue start */
+ 667               	.LSM102:
+ 668 0038 0F90      		pop __tmp_reg__
+ 669 003a 0F90      		pop __tmp_reg__
+ 670 003c CF91      		pop r28
+ 671 003e DF91      		pop r29
+ 672 0040 0895      		ret
+ 673               	.LFE30:
+ 675               		.section	.text.cb_notchC1,"ax",@progbits
+ 676               	.global	cb_notchC1
+ 678               	cb_notchC1:
+ 679               	.LFB31:
+ 680               	.LSM103:
+ 681               	.LVL65:
+ 682 0000 EF92      		push r14
+ 683 0002 FF92      		push r15
+ 684 0004 0F93      		push r16
+ 685 0006 1F93      		push r17
+ 686 0008 DF93      		push r29
+ 687 000a CF93      		push r28
+ 688 000c 00D0      		rcall .
+ 689 000e CDB7      		in r28,__SP_L__
+ 690 0010 DEB7      		in r29,__SP_H__
+ 691               	/* prologue: function */
+ 692               	/* frame size = 2 */
+ 693               	/* stack size = 8 */
+ 694               	.L__stack_usage = 8
+ 695               	.LSM104:
+ 696 0012 9A83      		std Y+2,r25
+ 697 0014 8983      		std Y+1,r24
+ 698               	.LVL66:
+ 699               	.LSM105:
+ 700 0016 BE01      		movw r22,r28
+ 701 0018 6F5F      		subi r22,lo8(-(1))
+ 702 001a 7F4F      		sbci r23,hi8(-(1))
+ 703 001c 40E1      		ldi r20,lo8(16)
+ 704 001e 50E0      		ldi r21,hi8(16)
+ 705 0020 0E94 0000 		call strtol
+ 706               	.LVL67:
+ 707 0024 7B01      		movw r14,r22
+ 708 0026 8C01      		movw r16,r24
+ 709               	.LVL68:
+ 710               	.LSM106:
+ 711 0028 0E94 0000 		call LEDs_ToggleLEDs.clone.0
+ 712               	.LVL69:
+ 713               	.LSM107:
+ 714 002c E114      		cp r14,__zero_reg__
+ 715 002e F104      		cpc r15,__zero_reg__
+ 716 0030 01F0      		breq .L43
+ 717 0032 81E0      		ldi r24,lo8(1)
+ 718 0034 E816      		cp r14,r24
+ 719 0036 F104      		cpc r15,__zero_reg__
+ 720 0038 01F4      		brne .L41
+ 721 003a 00C0      		rjmp .L45
+ 722               	.L43:
+ 723               	.LSM108:
+ 724 003c 899A      		sbi 49-32,1
+ 725               	.LSM109:
+ 726 003e 0E94 0000 		call LEDs_TurnOnLEDs.clone.2
+ 727               	.LSM110:
+ 728 0042 00C0      		rjmp .L41
+ 729               	.L45:
+ 730               	.LSM111:
+ 731 0044 0E94 0000 		call LEDs_TurnOffLEDs.clone.1
+ 732               	.LSM112:
+ 733 0048 8998      		cbi 49-32,1
+ 734               	.L41:
+ 735               	/* epilogue start */
+ 736               	.LSM113:
+ 737 004a 0F90      		pop __tmp_reg__
+ 738 004c 0F90      		pop __tmp_reg__
+ 739 004e CF91      		pop r28
+ 740 0050 DF91      		pop r29
+ 741 0052 1F91      		pop r17
+ 742 0054 0F91      		pop r16
+ 743 0056 FF90      		pop r15
+ 744 0058 EF90      		pop r14
+ 745               	.LVL70:
+ 746 005a 0895      		ret
+ 747               	.LFE31:
+ 749               		.section	.text.cb_notchV2,"ax",@progbits
+ 750               	.global	cb_notchV2
+ 752               	cb_notchV2:
+ 753               	.LFB32:
+ 754               	.LSM114:
+ 755               	.LVL71:
+ 756 0000 DF93      		push r29
+ 757 0002 CF93      		push r28
+ 758 0004 00D0      		rcall .
+ 759 0006 CDB7      		in r28,__SP_L__
+ 760 0008 DEB7      		in r29,__SP_H__
+ 761               	/* prologue: function */
+ 762               	/* frame size = 2 */
+ 763               	/* stack size = 4 */
+ 764               	.L__stack_usage = 4
+ 765               	.LSM115:
+ 766 000a 9A83      		std Y+2,r25
+ 767 000c 8983      		std Y+1,r24
+ 768               	.LVL72:
+ 769               	.LSM116:
+ 770 000e BE01      		movw r22,r28
+ 771 0010 6F5F      		subi r22,lo8(-(1))
+ 772 0012 7F4F      		sbci r23,hi8(-(1))
+ 773 0014 40E1      		ldi r20,lo8(16)
+ 774 0016 50E0      		ldi r21,hi8(16)
+ 775 0018 0E94 0000 		call strtol
+ 776               	.LVL73:
+ 777               	.LSM117:
+ 778 001c 6115      		cp r22,__zero_reg__
+ 779 001e 7105      		cpc r23,__zero_reg__
+ 780 0020 01F0      		breq .L48
+ 781 0022 6130      		cpi r22,1
+ 782 0024 7105      		cpc r23,__zero_reg__
+ 783 0026 01F4      		brne .L46
+ 784 0028 00C0      		rjmp .L50
+ 785               	.L48:
+ 786               	.LSM118:
+ 787 002a 769A      		sbi 46-32,6
+ 788               	.LSM119:
+ 789 002c 0E94 0000 		call LEDs_TurnOnLEDs.clone.2
+ 790               	.LVL74:
+ 791               	.LSM120:
+ 792 0030 00C0      		rjmp .L46
+ 793               	.LVL75:
+ 794               	.L50:
+ 795               	.LSM121:
+ 796 0032 7698      		cbi 46-32,6
+ 797               	.LSM122:
+ 798 0034 0E94 0000 		call LEDs_TurnOffLEDs.clone.1
+ 799               	.LVL76:
+ 800               	.L46:
+ 801               	/* epilogue start */
+ 802               	.LSM123:
+ 803 0038 0F90      		pop __tmp_reg__
+ 804 003a 0F90      		pop __tmp_reg__
+ 805 003c CF91      		pop r28
+ 806 003e DF91      		pop r29
+ 807 0040 0895      		ret
+ 808               	.LFE32:
+ 810               		.section	.text.cb_notchC2,"ax",@progbits
+ 811               	.global	cb_notchC2
+ 813               	cb_notchC2:
+ 814               	.LFB33:
+ 815               	.LSM124:
+ 816               	.LVL77:
+ 817 0000 EF92      		push r14
+ 818 0002 FF92      		push r15
+ 819 0004 0F93      		push r16
+ 820 0006 1F93      		push r17
+ 821 0008 DF93      		push r29
+ 822 000a CF93      		push r28
+ 823 000c 00D0      		rcall .
+ 824 000e CDB7      		in r28,__SP_L__
+ 825 0010 DEB7      		in r29,__SP_H__
+ 826               	/* prologue: function */
+ 827               	/* frame size = 2 */
+ 828               	/* stack size = 8 */
+ 829               	.L__stack_usage = 8
+ 830               	.LSM125:
+ 831 0012 9A83      		std Y+2,r25
+ 832 0014 8983      		std Y+1,r24
+ 833               	.LVL78:
+ 834               	.LSM126:
+ 835 0016 BE01      		movw r22,r28
+ 836 0018 6F5F      		subi r22,lo8(-(1))
+ 837 001a 7F4F      		sbci r23,hi8(-(1))
+ 838 001c 40E1      		ldi r20,lo8(16)
+ 839 001e 50E0      		ldi r21,hi8(16)
+ 840 0020 0E94 0000 		call strtol
+ 841               	.LVL79:
+ 842 0024 7B01      		movw r14,r22
+ 843 0026 8C01      		movw r16,r24
+ 844               	.LVL80:
+ 845               	.LSM127:
+ 846 0028 0E94 0000 		call LEDs_ToggleLEDs.clone.0
+ 847               	.LVL81:
+ 848               	.LSM128:
+ 849 002c E114      		cp r14,__zero_reg__
+ 850 002e F104      		cpc r15,__zero_reg__
+ 851 0030 01F0      		breq .L53
+ 852 0032 81E0      		ldi r24,lo8(1)
+ 853 0034 E816      		cp r14,r24
+ 854 0036 F104      		cpc r15,__zero_reg__
+ 855 0038 01F4      		brne .L51
+ 856 003a 00C0      		rjmp .L55
+ 857               	.L53:
+ 858               	.LSM129:
+ 859 003c 5F9A      		sbi 43-32,7
+ 860               	.LSM130:
+ 861 003e 0E94 0000 		call LEDs_TurnOnLEDs.clone.2
+ 862               	.LSM131:
+ 863 0042 00C0      		rjmp .L51
+ 864               	.L55:
+ 865               	.LSM132:
+ 866 0044 0E94 0000 		call LEDs_TurnOffLEDs.clone.1
+ 867               	.LSM133:
+ 868 0048 5F98      		cbi 43-32,7
+ 869               	.L51:
+ 870               	/* epilogue start */
+ 871               	.LSM134:
+ 872 004a 0F90      		pop __tmp_reg__
+ 873 004c 0F90      		pop __tmp_reg__
+ 874 004e CF91      		pop r28
+ 875 0050 DF91      		pop r29
+ 876 0052 1F91      		pop r17
+ 877 0054 0F91      		pop r16
+ 878 0056 FF90      		pop r15
+ 879 0058 EF90      		pop r14
+ 880               	.LVL82:
+ 881 005a 0895      		ret
+ 882               	.LFE33:
+ 884               		.comm FSM_State,1,1
+ 885               		.comm cmd,7,1
+ 886               		.comm cb_command,48,1
+ 1023               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 commands.c
+     /tmp/cccnfTyw.s:2      *ABS*:0000003f __SREG__
+     /tmp/cccnfTyw.s:3      *ABS*:0000003e __SP_H__
+     /tmp/cccnfTyw.s:4      *ABS*:0000003d __SP_L__
+     /tmp/cccnfTyw.s:5      *ABS*:00000034 __CCP__
+     /tmp/cccnfTyw.s:6      *ABS*:00000000 __tmp_reg__
+     /tmp/cccnfTyw.s:7      *ABS*:00000001 __zero_reg__
+     /tmp/cccnfTyw.s:18     .text.LEDs_ToggleLEDs.clone.0:00000000 LEDs_ToggleLEDs.clone.0
+     /tmp/cccnfTyw.s:38     .text.LEDs_TurnOffLEDs.clone.1:00000000 LEDs_TurnOffLEDs.clone.1
+     /tmp/cccnfTyw.s:55     .text.LEDs_TurnOnLEDs.clone.2:00000000 LEDs_TurnOnLEDs.clone.2
+     /tmp/cccnfTyw.s:73     .text.cb_gainC1:00000000 cb_gainC1
+     /tmp/cccnfTyw.s:148    .text.cb_gainV1:00000000 cb_gainV1
+     /tmp/cccnfTyw.s:223    .text.cb_gainC2:00000000 cb_gainC2
+     /tmp/cccnfTyw.s:298    .text.cb_gainV2:00000000 cb_gainV2
+     /tmp/cccnfTyw.s:373    .text.cb_filterV1:00000000 cb_filterV1
+     /tmp/cccnfTyw.s:434    .text.cb_filterC1:00000000 cb_filterC1
+     /tmp/cccnfTyw.s:495    .text.cb_filterV2:00000000 cb_filterV2
+     /tmp/cccnfTyw.s:556    .text.cb_filterC2:00000000 cb_filterC2
+     /tmp/cccnfTyw.s:617    .text.cb_notchV1:00000000 cb_notchV1
+     /tmp/cccnfTyw.s:678    .text.cb_notchC1:00000000 cb_notchC1
+     /tmp/cccnfTyw.s:752    .text.cb_notchV2:00000000 cb_notchV2
+     /tmp/cccnfTyw.s:813    .text.cb_notchC2:00000000 cb_notchC2
+                            *COM*:00000001 FSM_State
+                            *COM*:00000007 cmd
+                            *COM*:00000030 cb_command
+
+UNDEFINED SYMBOLS
+strtol
+SPI_MaterTransmit
+__do_clear_bss

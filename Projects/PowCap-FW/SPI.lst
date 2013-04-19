@@ -1,0 +1,66 @@
+   1               		.file	"SPI.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               		.section	.text.SPI_MasterInit,"ax",@progbits
+  19               	.global	SPI_MasterInit
+  21               	SPI_MasterInit:
+  22               	.LFB2:
+  23               	.LSM0:
+  24               	/* prologue: function */
+  25               	/* frame size = 0 */
+  26               	.LSM1:
+  27 0000 87E1      		ldi r24,lo8(23)
+  28 0002 84B9      		out 36-32,r24
+  29               	.LSM2:
+  30 0004 85B1      		in r24,37-32
+  31 0006 85B9      		out 37-32,r24
+  32               	.LSM3:
+  33 0008 2A9A      		sbi 37-32,2
+  34               	.LSM4:
+  35 000a 89E5      		ldi r24,lo8(89)
+  36 000c 8CBD      		out 76-32,r24
+  37               	/* epilogue start */
+  38               	.LSM5:
+  39 000e 0895      		ret
+  40               	.LFE2:
+  42               		.section	.text.SPI_MaterTransmit,"ax",@progbits
+  43               	.global	SPI_MaterTransmit
+  45               	SPI_MaterTransmit:
+  46               	.LFB3:
+  47               	.LSM6:
+  48               	.LVL0:
+  49               	/* prologue: function */
+  50               	/* frame size = 0 */
+  51               	.LSM7:
+  52 0000 8EBD      		out 78-32,r24
+  53               	.L4:
+  54               	.LSM8:
+  55 0002 0DB4      		in __tmp_reg__,77-32
+  56 0004 07FE      		sbrs __tmp_reg__,7
+  57 0006 00C0      		rjmp .L4
+  58               	/* epilogue start */
+  59               	.LSM9:
+  60 0008 0895      		ret
+  61               	.LFE3:
+  95               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 SPI.c
+     /tmp/ccIP6aPb.s:2      *ABS*:0000003f __SREG__
+     /tmp/ccIP6aPb.s:3      *ABS*:0000003e __SP_H__
+     /tmp/ccIP6aPb.s:4      *ABS*:0000003d __SP_L__
+     /tmp/ccIP6aPb.s:5      *ABS*:00000034 __CCP__
+     /tmp/ccIP6aPb.s:6      *ABS*:00000000 __tmp_reg__
+     /tmp/ccIP6aPb.s:7      *ABS*:00000001 __zero_reg__
+     /tmp/ccIP6aPb.s:21     .text.SPI_MasterInit:00000000 SPI_MasterInit
+     /tmp/ccIP6aPb.s:45     .text.SPI_MaterTransmit:00000000 SPI_MaterTransmit
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss

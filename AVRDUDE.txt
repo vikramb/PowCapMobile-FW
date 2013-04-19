@@ -1,0 +1,5 @@
+avrdude -c avrispmkII -p m32u4 -U flash:w:BootloaderDFU.hex
+
+avrdude -c usbtiny -p m32u4 -U flash:w:PowCap.hex
+
+eeprom or flash as memory types

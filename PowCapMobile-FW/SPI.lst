@@ -1,0 +1,74 @@
+   1               		.file	"SPI.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__ = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.SPI_MasterInit,"ax",@progbits
+  17               	.global	SPI_MasterInit
+  19               	SPI_MasterInit:
+  20               	.LFB0:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	/* stack size = 0 */
+  25               	.L__stack_usage = 0
+  26               	.LSM1:
+  27 0000 87E7      		ldi r24,lo8(119)
+  28 0002 84B9      		out 36-32,r24
+  29               	.LSM2:
+  30 0004 85B1      		in r24,37-32
+  31 0006 85B9      		out 37-32,r24
+  32               	.LSM3:
+  33 0008 2A9A      		sbi 37-32,2
+  34               	.LSM4:
+  35 000a 85B1      		in r24,37-32
+  36 000c 8560      		ori r24,lo8(5)
+  37 000e 85B9      		out 37-32,r24
+  38               	.LSM5:
+  39 0010 85B1      		in r24,37-32
+  40 0012 8660      		ori r24,lo8(6)
+  41 0014 85B9      		out 37-32,r24
+  42               	.LSM6:
+  43 0016 89E5      		ldi r24,lo8(89)
+  44 0018 8CBD      		out 76-32,r24
+  45               	/* epilogue start */
+  46               	.LSM7:
+  47 001a 0895      		ret
+  48               	.LFE0:
+  50               		.section	.text.SPI_MaterTransmit,"ax",@progbits
+  51               	.global	SPI_MaterTransmit
+  53               	SPI_MaterTransmit:
+  54               	.LFB1:
+  55               	.LSM8:
+  56               	.LVL0:
+  57               	/* prologue: function */
+  58               	/* frame size = 0 */
+  59               	/* stack size = 0 */
+  60               	.L__stack_usage = 0
+  61               	.LSM9:
+  62 0000 8EBD      		out 78-32,r24
+  63               	.L3:
+  64               	.LSM10:
+  65 0002 0DB4      		in __tmp_reg__,77-32
+  66 0004 07FE      		sbrs __tmp_reg__,7
+  67 0006 00C0      		rjmp .L3
+  68               	/* epilogue start */
+  69               	.LSM11:
+  70 0008 0895      		ret
+  71               	.LFE1:
+ 105               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 SPI.c
+     /tmp/cc90lQsT.s:2      *ABS*:0000003f __SREG__
+     /tmp/cc90lQsT.s:3      *ABS*:0000003e __SP_H__
+     /tmp/cc90lQsT.s:4      *ABS*:0000003d __SP_L__
+     /tmp/cc90lQsT.s:5      *ABS*:00000034 __CCP__
+     /tmp/cc90lQsT.s:6      *ABS*:00000000 __tmp_reg__
+     /tmp/cc90lQsT.s:7      *ABS*:00000001 __zero_reg__
+     /tmp/cc90lQsT.s:19     .text.SPI_MasterInit:00000000 SPI_MasterInit
+     /tmp/cc90lQsT.s:53     .text.SPI_MaterTransmit:00000000 SPI_MaterTransmit
+
+NO UNDEFINED SYMBOLS

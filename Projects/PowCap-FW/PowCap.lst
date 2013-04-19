@@ -1,0 +1,540 @@
+   1               		.file	"PowCap.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               		.section	.text.EVENT_USB_Device_Connect,"ax",@progbits
+  19               	.global	EVENT_USB_Device_Connect
+  21               	EVENT_USB_Device_Connect:
+  22               	.LFB119:
+  23               	.LSM0:
+  24               	/* prologue: function */
+  25               	/* frame size = 0 */
+  26               	/* epilogue start */
+  27               	.LSM1:
+  28 0000 0895      		ret
+  29               	.LFE119:
+  31               		.section	.text.EVENT_USB_Device_Disconnect,"ax",@progbits
+  32               	.global	EVENT_USB_Device_Disconnect
+  34               	EVENT_USB_Device_Disconnect:
+  35               	.LFB120:
+  36               	.LSM2:
+  37               	/* prologue: function */
+  38               	/* frame size = 0 */
+  39               	/* epilogue start */
+  40               	.LSM3:
+  41 0000 0895      		ret
+  42               	.LFE120:
+  44               		.section	.text.EVENT_CDC_Device_LineEncodingChanged,"ax",@progbits
+  45               	.global	EVENT_CDC_Device_LineEncodingChanged
+  47               	EVENT_CDC_Device_LineEncodingChanged:
+  48               	.LFB123:
+  49               	.LSM4:
+  50               	.LVL0:
+  51               	/* prologue: function */
+  52               	/* frame size = 0 */
+  53               	/* epilogue start */
+  54               	.LSM5:
+  55 0000 0895      		ret
+  56               	.LFE123:
+  58               		.section	.text.EVENT_USB_Device_ControlRequest,"ax",@progbits
+  59               	.global	EVENT_USB_Device_ControlRequest
+  61               	EVENT_USB_Device_ControlRequest:
+  62               	.LFB122:
+  63               	.LSM6:
+  64               	/* prologue: function */
+  65               	/* frame size = 0 */
+  66               	.LSM7:
+  67 0000 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+  68 0002 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+  69 0004 0E94 0000 		call CDC_Device_ProcessControlRequest
+  70               	/* epilogue start */
+  71               	.LSM8:
+  72 0008 0895      		ret
+  73               	.LFE122:
+  75               		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",@progbits
+  76               	.global	EVENT_USB_Device_ConfigurationChanged
+  78               	EVENT_USB_Device_ConfigurationChanged:
+  79               	.LFB121:
+  80               	.LSM9:
+  81               	/* prologue: function */
+  82               	/* frame size = 0 */
+  83               	.LSM10:
+  84 0000 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+  85 0002 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+  86 0004 0E94 0000 		call CDC_Device_ConfigureEndpoints
+  87               	/* epilogue start */
+  88               	.LSM11:
+  89 0008 0895      		ret
+  90               	.LFE121:
+  92               		.section	.text.SetupHardware,"ax",@progbits
+  93               	.global	SetupHardware
+  95               	SetupHardware:
+  96               	.LFB118:
+  97               	.LSM12:
+  98               	/* prologue: function */
+  99               	/* frame size = 0 */
+ 100               	.LSM13:
+ 101 0000 84B7      		in r24,84-32
+ 102 0002 877F      		andi r24,lo8(-9)
+ 103 0004 84BF      		out 84-32,r24
+ 104               	.LSM14:
+ 105 0006 88E1      		ldi r24,lo8(24)
+ 106               	/* #APP */
+ 107               	 ;  143 "PowCap.c" 1
+ 108 0008 0FB6      		in __tmp_reg__, __SREG__
+ 109 000a F894      		cli
+ 110 000c 8093 6000 		sts 96, r24
+ 111 0010 1092 6000 		sts 96, __zero_reg__
+ 112 0014 0FBE      		out __SREG__,__tmp_reg__
+ 113               		
+ 114               	 ;  0 "" 2
+ 115               	/* #NOAPP */
+ 116               	.LBB85:
+ 117               	.LSM15:
+ 118 0016 80E0      		ldi r24,lo8(0)
+ 119 0018 90E0      		ldi r25,hi8(0)
+ 120 001a 20E8      		ldi r18,lo8(-128)
+ 121               	/* #APP */
+ 122               	 ;  146 "PowCap.c" 1
+ 123 001c 0FB6      		in __tmp_reg__,__SREG__
+ 124 001e F894      		cli
+ 125 0020 2093 6100 		sts 97, r18
+ 126 0024 8093 6100 		sts 97, r24
+ 127 0028 0FBE      		out __SREG__, __tmp_reg__
+ 128               	 ;  0 "" 2
+ 129               	/* #NOAPP */
+ 130               	.LBE85:
+ 131               	.LBB86:
+ 132               	.LBB87:
+ 133               	.LSM16:
+ 134 002a 539A      		sbi 42-32,3
+ 135               	.LSM17:
+ 136 002c 5B9A      		sbi 43-32,3
+ 137               	.LBE87:
+ 138               	.LBE86:
+ 139               	.LBB88:
+ 140               	.LBB89:
+ 141               	.LSM18:
+ 142 002e 5B98      		cbi 43-32,3
+ 143               	.LBE89:
+ 144               	.LBE88:
+ 145               	.LSM19:
+ 146 0030 0E94 0000 		call SPI_MasterInit
+ 147               	.LSM20:
+ 148 0034 0E94 0000 		call filters_MasterInit
+ 149               	.LSM21:
+ 150 0038 0E94 0000 		call USB_Init
+ 151               	.LSM22:
+ 152 003c 0E94 0000 		call setup_callbacks
+ 153               	/* epilogue start */
+ 154               	.LSM23:
+ 155 0040 0895      		ret
+ 156               	.LFE118:
+ 158               		.section	.text.main,"ax",@progbits
+ 159               	.global	main
+ 161               	main:
+ 162               	.LFB117:
+ 163               	.LSM24:
+ 164 0000 0F93      		push r16
+ 165 0002 1F93      		push r17
+ 166 0004 CF93      		push r28
+ 167 0006 DF93      		push r29
+ 168               	/* prologue: function */
+ 169               	/* frame size = 0 */
+ 170               	.LSM25:
+ 171 0008 0E94 0000 		call SetupHardware
+ 172               	.LBB90:
+ 173               	.LBB91:
+ 174               	.LSM26:
+ 175 000c E0E0      		ldi r30,lo8(USB_Buffer)
+ 176 000e F0E0      		ldi r31,hi8(USB_Buffer)
+ 177               	.LVL1:
+ 178               	.LBB92:
+ 179               	.LBB93:
+ 180               	.LSM27:
+ 181               	.LSM28:
+ 182 0010 2FB7      		in r18,__SREG__
+ 183               	.LVL2:
+ 184               	.LBE93:
+ 185               	.LBE92:
+ 186               	.LBB94:
+ 187               	.LBB95:
+ 188               	.LSM29:
+ 189               	.LSM30:
+ 190               	/* #APP */
+ 191               	 ;  389 "../../LUFA/Drivers/USB/../../Common/Common.h" 1
+ 192 0012 F894      		cli
+ 193               	 ;  0 "" 2
+ 194               	.LSM31:
+ 195               	/* #NOAPP */
+ 196               	.LBE95:
+ 197               	.LBE94:
+ 198               	.LSM32:
+ 199 0014 80E0      		ldi r24,lo8(USB_Buffer_Data)
+ 200 0016 90E0      		ldi r25,hi8(USB_Buffer_Data)
+ 201 0018 9183      		std Z+1,r25
+ 202 001a 8083      		st Z,r24
+ 203               	.LSM33:
+ 204 001c 9383      		std Z+3,r25
+ 205 001e 8283      		std Z+2,r24
+ 206               	.LSM34:
+ 207 0020 9583      		std Z+5,r25
+ 208 0022 8483      		std Z+4,r24
+ 209               	.LSM35:
+ 210 0024 80E0      		ldi r24,lo8(USB_Buffer_Data+128)
+ 211 0026 90E0      		ldi r25,hi8(USB_Buffer_Data+128)
+ 212 0028 9783      		std Z+7,r25
+ 213 002a 8683      		std Z+6,r24
+ 214               	.LSM36:
+ 215 002c 80E8      		ldi r24,lo8(-128)
+ 216 002e 8087      		std Z+8,r24
+ 217               	.LSM37:
+ 218 0030 1286      		std Z+10,__zero_reg__
+ 219 0032 1186      		std Z+9,__zero_reg__
+ 220               	.LBB96:
+ 221               	.LBB97:
+ 222               	.LSM38:
+ 223               	.LSM39:
+ 224 0034 2FBF      		out __SREG__,r18
+ 225               	.LSM40:
+ 226               	.LBE97:
+ 227               	.LBE96:
+ 228               	.LBE91:
+ 229               	.LBE90:
+ 230               	.LSM41:
+ 231               	/* #APP */
+ 232               	 ;  92 "PowCap.c" 1
+ 233 0036 7894      		sei
+ 234               	 ;  0 "" 2
+ 235               	/* #NOAPP */
+ 236               	.LBB98:
+ 237               	.LBB99:
+ 238               	.LBB100:
+ 239               	.LBB101:
+ 240               	.LSM42:
+ 241 0038 00E0      		ldi r16,lo8(USB_Buffer)
+ 242 003a 10E0      		ldi r17,hi8(USB_Buffer)
+ 243               	.LVL3:
+ 244               	.L20:
+ 245               	.LBE101:
+ 246               	.LBE100:
+ 247               	.LBE99:
+ 248               	.LBB110:
+ 249               	.LBB111:
+ 250               	.LBB112:
+ 251               	.LBB113:
+ 252               	.LBB114:
+ 253               	.LBB115:
+ 254               	.LSM43:
+ 255               	.LSM44:
+ 256 003c 8FB7      		in r24,__SREG__
+ 257               	.LVL4:
+ 258               	.LBE115:
+ 259               	.LBE114:
+ 260               	.LBB116:
+ 261               	.LBB117:
+ 262               	.LSM45:
+ 263               	.LSM46:
+ 264               	/* #APP */
+ 265               	 ;  389 "../../LUFA/Drivers/USB/../../Common/Common.h" 1
+ 266 003e F894      		cli
+ 267               	 ;  0 "" 2
+ 268               	.LSM47:
+ 269               	/* #NOAPP */
+ 270               	.LBE117:
+ 271               	.LBE116:
+ 272               	.LSM48:
+ 273 0040 2091 0000 		lds r18,USB_Buffer+9
+ 274 0044 3091 0000 		lds r19,(USB_Buffer+9)+1
+ 275               	.LVL5:
+ 276               	.LBB118:
+ 277               	.LBB119:
+ 278               	.LSM49:
+ 279               	.LSM50:
+ 280 0048 8FBF      		out __SREG__,r24
+ 281               	.LSM51:
+ 282               	.LBE119:
+ 283               	.LBE118:
+ 284               	.LBE113:
+ 285               	.LBE112:
+ 286               	.LBE111:
+ 287               	.LBE110:
+ 288               	.LSM52:
+ 289 004a 8091 0000 		lds r24,USB_Buffer+8
+ 290               	.LVL6:
+ 291 004e 90E0      		ldi r25,lo8(0)
+ 292 0050 2817      		cp r18,r24
+ 293 0052 3907      		cpc r19,r25
+ 294 0054 01F0      		breq .L14
+ 295               	.LBB120:
+ 296               	.LSM53:
+ 297 0056 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 298 0058 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 299 005a 0E94 0000 		call CDC_Device_ReceiveByte
+ 300               	.LVL7:
+ 301 005e AC01      		movw r20,r24
+ 302               	.LVL8:
+ 303               	.LSM54:
+ 304 0060 97FD      		sbrc r25,7
+ 305 0062 00C0      		rjmp .L14
+ 306               	.LVL9:
+ 307               	.LBB109:
+ 308               	.LBB108:
+ 309               	.LSM55:
+ 310 0064 E801      		movw r28,r16
+ 311               	.LVL10:
+ 312               	.LSM56:
+ 313 0066 E881      		ld r30,Y
+ 314 0068 F981      		ldd r31,Y+1
+ 315 006a 8083      		st Z,r24
+ 316               	.LSM57:
+ 317 006c 8881      		ld r24,Y
+ 318 006e 9981      		ldd r25,Y+1
+ 319               	.LVL11:
+ 320 0070 0196      		adiw r24,1
+ 321 0072 9983      		std Y+1,r25
+ 322 0074 8883      		st Y,r24
+ 323 0076 2E81      		ldd r18,Y+6
+ 324 0078 3F81      		ldd r19,Y+7
+ 325 007a 8217      		cp r24,r18
+ 326 007c 9307      		cpc r25,r19
+ 327 007e 01F4      		brne .L15
+ 328               	.LSM58:
+ 329 0080 8C81      		ldd r24,Y+4
+ 330 0082 9D81      		ldd r25,Y+5
+ 331 0084 9983      		std Y+1,r25
+ 332 0086 8883      		st Y,r24
+ 333               	.L15:
+ 334               	.LBB102:
+ 335               	.LBB103:
+ 336               	.LSM59:
+ 337               	.LSM60:
+ 338 0088 2FB7      		in r18,__SREG__
+ 339               	.LVL12:
+ 340               	.LBE103:
+ 341               	.LBE102:
+ 342               	.LBB104:
+ 343               	.LBB105:
+ 344               	.LSM61:
+ 345               	.LSM62:
+ 346               	/* #APP */
+ 347               	 ;  389 "../../LUFA/Drivers/USB/../../Common/Common.h" 1
+ 348 008a F894      		cli
+ 349               	 ;  0 "" 2
+ 350               	.LSM63:
+ 351               	/* #NOAPP */
+ 352               	.LBE105:
+ 353               	.LBE104:
+ 354               	.LSM64:
+ 355 008c 8985      		ldd r24,Y+9
+ 356 008e 9A85      		ldd r25,Y+10
+ 357 0090 0196      		adiw r24,1
+ 358 0092 9A87      		std Y+10,r25
+ 359 0094 8987      		std Y+9,r24
+ 360               	.LBB106:
+ 361               	.LBB107:
+ 362               	.LSM65:
+ 363               	.LSM66:
+ 364 0096 2FBF      		out __SREG__,r18
+ 365               	.LSM67:
+ 366               	.LBE107:
+ 367               	.LBE106:
+ 368               	.LBE108:
+ 369               	.LBE109:
+ 370               	.LSM68:
+ 371 0098 CA01      		movw r24,r20
+ 372 009a 0E94 0000 		call process_byte
+ 373               	.LVL13:
+ 374               	.L14:
+ 375               	.LBE120:
+ 376               	.LBB121:
+ 377               	.LBB122:
+ 378               	.LBB123:
+ 379               	.LBB124:
+ 380               	.LSM69:
+ 381               	.LSM70:
+ 382 009e 8FB7      		in r24,__SREG__
+ 383               	.LVL14:
+ 384               	.LBE124:
+ 385               	.LBE123:
+ 386               	.LBB125:
+ 387               	.LBB126:
+ 388               	.LSM71:
+ 389               	.LSM72:
+ 390               	/* #APP */
+ 391               	 ;  389 "../../LUFA/Drivers/USB/../../Common/Common.h" 1
+ 392 00a0 F894      		cli
+ 393               	 ;  0 "" 2
+ 394               	.LSM73:
+ 395               	/* #NOAPP */
+ 396               	.LBE126:
+ 397               	.LBE125:
+ 398               	.LSM74:
+ 399 00a2 C091 0000 		lds r28,USB_Buffer+9
+ 400 00a6 D091 0000 		lds r29,(USB_Buffer+9)+1
+ 401               	.LVL15:
+ 402               	.LBB127:
+ 403               	.LBB128:
+ 404               	.LSM75:
+ 405               	.LSM76:
+ 406 00aa 8FBF      		out __SREG__,r24
+ 407               	.LSM77:
+ 408 00ac 00C0      		rjmp .L16
+ 409               	.LVL16:
+ 410               	.L19:
+ 411               	.LBE128:
+ 412               	.LBE127:
+ 413               	.LBE122:
+ 414               	.LBE121:
+ 415               	.LSM78:
+ 416 00ae E091 0000 		lds r30,USB_Buffer+2
+ 417 00b2 F091 0000 		lds r31,(USB_Buffer+2)+1
+ 418               	.LVL17:
+ 419 00b6 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 420 00b8 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 421               	.LVL18:
+ 422 00ba 6081      		ld r22,Z
+ 423 00bc 0E94 0000 		call CDC_Device_SendByte
+ 424               	.LVL19:
+ 425 00c0 8823      		tst r24
+ 426 00c2 01F4      		brne .L17
+ 427               	.LBB129:
+ 428               	.LBB130:
+ 429               	.LSM79:
+ 430 00c4 F801      		movw r30,r16
+ 431               	.LVL20:
+ 432               	.LSM80:
+ 433 00c6 8281      		ldd r24,Z+2
+ 434 00c8 9381      		ldd r25,Z+3
+ 435 00ca 0196      		adiw r24,1
+ 436 00cc 9383      		std Z+3,r25
+ 437 00ce 8283      		std Z+2,r24
+ 438 00d0 2681      		ldd r18,Z+6
+ 439 00d2 3781      		ldd r19,Z+7
+ 440 00d4 8217      		cp r24,r18
+ 441 00d6 9307      		cpc r25,r19
+ 442 00d8 01F4      		brne .L18
+ 443               	.LSM81:
+ 444 00da 8481      		ldd r24,Z+4
+ 445 00dc 9581      		ldd r25,Z+5
+ 446 00de 9383      		std Z+3,r25
+ 447 00e0 8283      		std Z+2,r24
+ 448               	.L18:
+ 449               	.LBB131:
+ 450               	.LBB132:
+ 451               	.LSM82:
+ 452               	.LSM83:
+ 453 00e2 2FB7      		in r18,__SREG__
+ 454               	.LVL21:
+ 455               	.LBE132:
+ 456               	.LBE131:
+ 457               	.LBB133:
+ 458               	.LBB134:
+ 459               	.LSM84:
+ 460               	.LSM85:
+ 461               	/* #APP */
+ 462               	 ;  389 "../../LUFA/Drivers/USB/../../Common/Common.h" 1
+ 463 00e4 F894      		cli
+ 464               	 ;  0 "" 2
+ 465               	.LSM86:
+ 466               	/* #NOAPP */
+ 467               	.LBE134:
+ 468               	.LBE133:
+ 469               	.LSM87:
+ 470 00e6 8185      		ldd r24,Z+9
+ 471 00e8 9285      		ldd r25,Z+10
+ 472 00ea 0197      		sbiw r24,1
+ 473 00ec 9287      		std Z+10,r25
+ 474 00ee 8187      		std Z+9,r24
+ 475               	.LBB135:
+ 476               	.LBB136:
+ 477               	.LSM88:
+ 478               	.LSM89:
+ 479 00f0 2FBF      		out __SREG__,r18
+ 480               	.LSM90:
+ 481 00f2 2197      		sbiw r28,1
+ 482               	.LVL22:
+ 483               	.L16:
+ 484               	.LBE136:
+ 485               	.LBE135:
+ 486               	.LBE130:
+ 487               	.LBE129:
+ 488               	.LSM91:
+ 489 00f4 2097      		sbiw r28,0
+ 490 00f6 01F4      		brne .L19
+ 491               	.L17:
+ 492               	.LSM92:
+ 493 00f8 80E0      		ldi r24,lo8(VirtualSerial_CDC_Interface)
+ 494 00fa 90E0      		ldi r25,hi8(VirtualSerial_CDC_Interface)
+ 495               	.LVL23:
+ 496 00fc 0E94 0000 		call CDC_Device_USBTask
+ 497               	.LVL24:
+ 498               	.LSM93:
+ 499 0100 0E94 0000 		call USB_USBTask
+ 500 0104 00C0      		rjmp .L20
+ 501               	.LBE98:
+ 502               	.LFE117:
+ 504               	.global	VirtualSerial_CDC_Interface
+ 505               		.data
+ 508               	VirtualSerial_CDC_Interface:
+ 509 0000 00        		.byte	0
+ 510 0001 03        		.byte	3
+ 511 0002 1000      		.word	16
+ 512 0004 00        		.byte	0
+ 513 0005 04        		.byte	4
+ 514 0006 1000      		.word	16
+ 515 0008 00        		.byte	0
+ 516 0009 02        		.byte	2
+ 517 000a 0800      		.word	8
+ 518 000c 00        		.byte	0
+ 519 000d 0000 0000 		.skip 9,0
+ 519      0000 0000 
+ 519      00
+ 520               		.lcomm USB_Buffer,11
+ 521               		.lcomm USB_Buffer_Data,128
+ 522               		.comm FSM_State,1,1
+ 523               		.comm cmd,5,1
+ 524               		.comm cb_command,20,1
+ 597               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 PowCap.c
+     /tmp/ccITbzBY.s:2      *ABS*:0000003f __SREG__
+     /tmp/ccITbzBY.s:3      *ABS*:0000003e __SP_H__
+     /tmp/ccITbzBY.s:4      *ABS*:0000003d __SP_L__
+     /tmp/ccITbzBY.s:5      *ABS*:00000034 __CCP__
+     /tmp/ccITbzBY.s:6      *ABS*:00000000 __tmp_reg__
+     /tmp/ccITbzBY.s:7      *ABS*:00000001 __zero_reg__
+     /tmp/ccITbzBY.s:21     .text.EVENT_USB_Device_Connect:00000000 EVENT_USB_Device_Connect
+     /tmp/ccITbzBY.s:34     .text.EVENT_USB_Device_Disconnect:00000000 EVENT_USB_Device_Disconnect
+     /tmp/ccITbzBY.s:47     .text.EVENT_CDC_Device_LineEncodingChanged:00000000 EVENT_CDC_Device_LineEncodingChanged
+     /tmp/ccITbzBY.s:61     .text.EVENT_USB_Device_ControlRequest:00000000 EVENT_USB_Device_ControlRequest
+     /tmp/ccITbzBY.s:508    .data:00000000 VirtualSerial_CDC_Interface
+     /tmp/ccITbzBY.s:78     .text.EVENT_USB_Device_ConfigurationChanged:00000000 EVENT_USB_Device_ConfigurationChanged
+     /tmp/ccITbzBY.s:95     .text.SetupHardware:00000000 SetupHardware
+     /tmp/ccITbzBY.s:161    .text.main:00000000 main
+                             .bss:00000000 USB_Buffer
+     /tmp/ccITbzBY.s:520    .bss:0000000b USB_Buffer_Data
+                            *COM*:00000001 FSM_State
+                            *COM*:00000005 cmd
+                            *COM*:00000014 cb_command
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+CDC_Device_ProcessControlRequest
+CDC_Device_ConfigureEndpoints
+SPI_MasterInit
+filters_MasterInit
+USB_Init
+setup_callbacks
+CDC_Device_ReceiveByte
+process_byte
+CDC_Device_SendByte
+CDC_Device_USBTask
+USB_USBTask

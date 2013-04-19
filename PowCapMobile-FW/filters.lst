@@ -1,0 +1,57 @@
+   1               		.file	"filters.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__ = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.filters_MasterInit,"ax",@progbits
+  17               	.global	filters_MasterInit
+  19               	filters_MasterInit:
+  20               	.LFB0:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	/* stack size = 0 */
+  25               	.L__stack_usage = 0
+  26               	.LSM1:
+  27 0000 85B7      		in r24,85-32
+  28 0002 8068      		ori r24,lo8(-128)
+  29 0004 85BF      		out 85-32,r24
+  30               	.LSM2:
+  31 0006 85B7      		in r24,85-32
+  32 0008 8068      		ori r24,lo8(-128)
+  33 000a 85BF      		out 85-32,r24
+  34               	.LSM3:
+  35 000c 8C98      		cbi 49-32,4
+  36               	.LSM4:
+  37 000e 8D98      		cbi 49-32,5
+  38               	.LSM5:
+  39 0010 8E98      		cbi 49-32,6
+  40               	.LSM6:
+  41 0012 8F98      		cbi 49-32,7
+  42               	.LSM7:
+  43 0014 8898      		cbi 49-32,0
+  44               	.LSM8:
+  45 0016 8998      		cbi 49-32,1
+  46               	.LSM9:
+  47 0018 7698      		cbi 46-32,6
+  48               	.LSM10:
+  49 001a 5F98      		cbi 43-32,7
+  50               	/* epilogue start */
+  51               	.LSM11:
+  52 001c 0895      		ret
+  53               	.LFE0:
+  79               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 filters.c
+     /tmp/ccgrMNVN.s:2      *ABS*:0000003f __SREG__
+     /tmp/ccgrMNVN.s:3      *ABS*:0000003e __SP_H__
+     /tmp/ccgrMNVN.s:4      *ABS*:0000003d __SP_L__
+     /tmp/ccgrMNVN.s:5      *ABS*:00000034 __CCP__
+     /tmp/ccgrMNVN.s:6      *ABS*:00000000 __tmp_reg__
+     /tmp/ccgrMNVN.s:7      *ABS*:00000001 __zero_reg__
+     /tmp/ccgrMNVN.s:19     .text.filters_MasterInit:00000000 filters_MasterInit
+
+NO UNDEFINED SYMBOLS
