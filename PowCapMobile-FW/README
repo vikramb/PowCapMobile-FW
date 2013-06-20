@@ -1,5 +1,7 @@
-Ensure that LUFA is properly installed and place firmware directory in the same folder as the LUFA directory as demonstrated in this repository. 
+Using this firmware, Step 1:
+Ensure that LUFA is properly installed and place firmware directory (PowCapMobile-FW) in the same folder as the LUFA directory as demonstrated in this repository. 
 
+Compile firmware, Step 2:
 Run the makefile to generate the .hex file, and then program the MCU via programmer of your choice in conjunction with avrdude.
 
 Note: This makefile specifies the usbtiny programmer, if you are hoping to use a different programmer you will need to modify the makefile and change this line.
