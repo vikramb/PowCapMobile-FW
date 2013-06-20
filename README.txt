@@ -1,5 +1,6 @@
+Note: this is the README for the LUFA library which is required to compile this firmware. For details on implementing the firmware, please see the README inside the PowCapMobile-FW folder.
 
-                   _   _ _ ___ _
+_   _ _ ___ _
                   | | | | | __/ \
                   | |_| U | _| o | - The Lightweight USB
                   |___|___|_||_n_|    Framework for AVRs
