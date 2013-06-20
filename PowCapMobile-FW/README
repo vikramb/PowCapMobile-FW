@@ -4,4 +4,4 @@ Ensure that LUFA is properly installed and place firmware directory (PowCapMobil
 Compile firmware, Step 2:
 "Make" to generate the .hex file, and then program the MCU via programmer of your choice in conjunction with avrdude. You can find a good tutorial on AVRDUDE here: http://www.ladyada.net/learn/avr/avrdude.html
 
-Note: This makefile specifies the usbtiny programmer (line 351 in makefile), if you are hoping to use a different programmer you will need to modify the makefile and change this line.
+Note: This makefile specifies the usbtiny programmer (line 351 in makefile), if you are hoping to use a different programmer you will need to modify the makefile by changing this line.
